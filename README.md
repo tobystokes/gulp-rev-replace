@@ -135,6 +135,15 @@ return gulp.src(opt.distFolder + '**/*.js')
     .pipe(gulp.dest(opt.distFolder));
 ```
 
+#### options.reinstate
+Type: `boolean`
+
+Default: `false`
+
+Reverses the replacement, i.e. sustitutes the revisioned filename with the original
+
+
+
 ## Contributors
 
 - Chad Jablonski
