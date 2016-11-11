@@ -18,6 +18,10 @@ function plugin(options) {
     options.canonicalUris = true;
   }
 
+  if (!options.reinstate) {
+    options.reinstate = false;
+  }
+
   options.prefix = options.prefix || '';
 
   options.replaceInExtensions = options.replaceInExtensions || ['.js', '.css', '.html', '.hbs'];
@@ -81,7 +85,11 @@ function plugin(options) {
         renames.forEach(function replaceOnce(rename) {
           var unreved = options.modifyUnreved ? options.modifyUnreved(rename.unreved) : rename.unreved;
           var reved = options.modifyReved ? options.modifyReved(rename.reved) : rename.reved;
-          contents = contents.split(unreved).join(reved);
+          if (options.reinstate) {
+            contents = contents.split(reved).join(unreved);
+          } else {
+            contents = contents.split(unreved).join(reved);
+          }
           if (options.prefix) {
             contents = contents.split('/' + options.prefix).join(options.prefix + '/');
           }
